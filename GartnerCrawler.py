@@ -19,8 +19,14 @@ time.sleep(10)
 # 검색어 창을 찾아 search 변수에 저장 (By.XPATH 방식)
 news_box = driver.find_element(By.XPATH, '//*[@id="gartnerinternalpage-141b1ef95b"]/div[2]/div/div/div/div/div/div[2]/section/div[1]/div[2]')
 news = driver.find_element(By.CLASS_NAME, 'newsletter-item')
-a = news_box.get_dom_attribute('href')
-print(a)
-# for elem in news_box:
-#     href = elem.get_attribute('href')
-#     print(href)
+
+#뉴스 요소를 클래스 이름으로 찾기
+news_items = news_box.find_elements(By.CLASS_NAME, 'newsletter-item')
+
+#각 뉴스 요소에서 href 속성을 가져와 출력
+for news_item in news_items:
+    href = news_item.get_attribute('href')
+    print(href)
+
+#크롬드라이버 종료
+driver.quit()
